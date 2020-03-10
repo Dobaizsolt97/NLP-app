@@ -1,14 +1,19 @@
 const dotenv = require("dotenv");
 dotenv.config();
 var path = require("path");
+var bodyParser = require("body-parser");
 const express = require("express");
 const mockAPIResponse = require("./mockAPI.js");
 const APIrespone = {
   polarity: "default",
-  subjectivity: "default"
+  subjectivity: "default",
+  article: "Hello human, i no npt like you"
 };
 const app = express();
 app.use(express.static("dist"));
+
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 app.get("/", function(req, res) {
   // res.sendFile('dist/index.html')
@@ -27,19 +32,25 @@ var textapi = new AYLIENTextAPI({
 });
 
 app.get("/test", function(req, res) {
-  res.send(APIrespone);
-});
-/* 
-textapi.sentiment(
-  {
-    text: "I do not like his atitude"
-  },
-  function(error, response) {
-    if (error === null) {
-      const { polarity, subjectivity } = response;
-      APIrespone.polarity = polarity;
-      APIrespone.subjectivity = subjectivity;
-      console.log(APIrespone);
+  const textToAnalize = APIrespone.article;
+  textapi.sentiment(
+    {
+      text: `${textToAnalize}`
+    },
+    function(error, response) {
+      if (error === null) {
+        const { polarity, subjectivity } = response;
+        APIrespone.polarity = polarity;
+        APIrespone.subjectivity = subjectivity;
+        console.log(APIrespone);
+        res.send(APIrespone);
+      }
     }
-  }
-); */
+  );
+});
+
+app.post("/test", function(req, res) {
+  console.log(`tishi is it ${req.body.value}`);
+  APIrespone.article = req.body.value;
+  res.json("added");
+});
