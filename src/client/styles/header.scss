@@ -1,5 +1,11 @@
 header {
-    display: flex;
-    justify-content: space-between;
-    padding: 10px 40px;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 40px;
+  background-color: #274441;
+}
+
+header > .head > h1 {
+  font-size: 25px;
+  color: white;
 }
