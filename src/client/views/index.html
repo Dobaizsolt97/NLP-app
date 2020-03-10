@@ -19,14 +19,15 @@
 
         <main>
             <section>
+                
                 <form id='form-field' class="" onsubmit="return handleSubmit(event)">
-                    <input id="name" type="text" name="input" value=""  placeholder="Name">
+                    <textarea required rows="4" id="name" type="text" name="input" value=""  placeholder="Article"></textarea>
                     <input id='btn' type="submit" name="" value="submit" onclick="return Client.handleSubmit(event)" onsubmit="return handleSubmit(event)">
                 </form>
             <section>
 
             <section>
-                <strong id='strong'>Form Results:</strong>
+                <strong id='strong'>Results:</strong>
                 <div id="results"></div>
             </section>
         </main>
@@ -34,6 +35,15 @@
         <footer>
             <p>Made with the Aylien Api</p>
         </footer>
+        <script>
+            // Check that service workers are supported
+            if ('serviceWorker' in navigator) {
+                // Use the window load event to keep the page load performant
+                window.addEventListener('load', () => {
+                    navigator.serviceWorker.register('/service-worker.js');
+                });
+            }
+        </script>
 
     </body>
 </html>

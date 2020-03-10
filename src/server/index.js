@@ -40,6 +40,7 @@ app.get("/test", function(req, res) {
     function(error, response) {
       if (error === null) {
         const { polarity, subjectivity } = response;
+        console.log(response);
         APIrespone.polarity = polarity;
         APIrespone.subjectivity = subjectivity;
         console.log(APIrespone);
