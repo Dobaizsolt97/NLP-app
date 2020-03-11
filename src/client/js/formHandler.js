@@ -7,7 +7,7 @@ function handleSubmit(event) {
   let formText = document.getElementById("name").value;
   let results = document.getElementById("results");
   if (formText) {
-    if (CheckLink) {
+    if (!CheckLink) {
       alert("please enter an article");
     } else {
       postData("http://localhost:8080/test", formText);
