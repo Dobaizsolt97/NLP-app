@@ -7,15 +7,18 @@ function handleSubmit(event) {
   let formText = document.getElementById("name").value;
   let results = document.getElementById("results");
   if (formText) {
-    let regex = /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/gm;
-    let rez = regex.test(formText);
-    if (rez) {
+    if (CheckLink) {
       alert("please enter an article");
     } else {
-      postData(formText);
+      postData("http://localhost:8080/test", formText);
       updateUi(results);
     }
   }
 }
 
-export { handleSubmit };
+export { handleSubmit, CheckLink };
+function CheckLink(formText) {
+  let regex = /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/gm;
+  let rez = regex.test(formText);
+  return rez;
+}
